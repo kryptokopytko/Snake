@@ -56,10 +56,49 @@ bool Score::score_a_point() {
 }
 
 void Score::change_score() {
-	char title[30];
+	char title[200];
+	int high_score = highscore();
 	int score = length - starting_length;
-	snprintf(title, 30, "Score: %d", score);
+	snprintf(title, 200, "Score: %d                                                                                             Highscore: %d", score, high_score);
 	SDL_SetWindowTitle(window, title);
+}
+
+int Score::highscore() {
+	string filename = "highscore.txt";
+	if (player == Kasia) filename = "highscore_kasia.txt";
+	if (player == Marcin) filename = "highscore_marcin.txt";
+
+	string line;
+	ifstream file(filename);
+	getline(file, line);
+	int highscore = std::stoi(line);
+	file.close();
+	
+	int score = length - starting_length;
+	if (highscore < score) {
+		ofstream myfile;
+		myfile.open(filename);
+		myfile << score;
+		myfile.close();
+		highscore = score;
+	}
+	return highscore;
+}
+
+void Score::clean_highscores() {
+	string filename = "highscore.txt";
+	ofstream myfile;
+	myfile.open(filename);
+	myfile << 0;
+	myfile.close();
+	filename = "highscore_kasia.txt";
+	myfile.open(filename);
+	myfile << 0;
+	myfile.close();
+	filename = "highscore_marcin.txt";
+	myfile.open(filename);
+	myfile << 0;
+	myfile.close();
 }
 
 bool Score::is_snake_hurt() {

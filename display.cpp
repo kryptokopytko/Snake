@@ -1,7 +1,7 @@
 #include "display.hpp"
 
 Display::Display() : Score() {
-	colors = new Colors[number_of_points];
+	colors = new Colors[number_of_cells];
 	for (int i = 0; i < number_of_points; i++)
 		colors[i] = Colors();
 	gradient = new Color[number_of_cells];
@@ -28,9 +28,9 @@ void Display::generate_gradient() {
 	int step = 15;
 	if(length > 10)
 		 step = 200 / length + 1;
-
 	for (int i = 1; i < length; i++) 
 		gradient[i] = col.next_color(gradient[i - 1], step);
+
 }
 
 void Display::extend_gradient() {
@@ -50,10 +50,9 @@ void Display::draw() {
 		generate_gradient();
 
 	draw_head(gradient[0], position[0]);
-
-	for (int i = 1; i < length; i++) {
+	for (int i = 1; i < length; i++) 
 		draw_rect(gradient[i], position[i]);
-	}
+
 
 	for (int i = 0; i < number_of_points; i++) {
 		SDL_Rect p = point_to_rect(points[i]);
@@ -61,7 +60,6 @@ void Display::draw() {
 	}
 
 	SDL_RenderPresent(renderer);
-	SDL_Delay(70);
 }
 
 

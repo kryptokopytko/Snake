@@ -14,16 +14,16 @@ int main(int argc, char* argv[]) {
 		a.start();
 		a.generate_gradient();
 		a.generate_points();
+		a.change_score();
 		while (a.running) {
 			a.draw();
-			a.move();
 			a.take_input();
-			
+			a.move();
 			if (a.is_snake_hurt()) 
 				a.kill();
+			SDL_Delay(70);
 		}
 		a.restart_screen();
-		
 	}
 
 

@@ -5,7 +5,9 @@ Window::Window() {
     screen_width = 600;
     cell_height = 30;
     number_of_cells = (screen_height * screen_width) / (cell_height * cell_height);
+    number_of_points = 5;
     restart = true;
+    player = Unknown;
 }
 
 Window::Window(int height, int width, int cell) {
@@ -13,6 +15,8 @@ Window::Window(int height, int width, int cell) {
     screen_width = width;
     cell_height = cell;
     number_of_cells = (screen_height * screen_width) / (cell_height * cell_height);
+    number_of_points = 5;
+    player = Unknown;
     restart = true;
 }
 
@@ -84,6 +88,7 @@ void Window::load_image(const char* filename) {
 
 void Window::starting_screen() {
     running = false;
+    player = Unknown;
     load_image("start.jpg");
     
     while (!running) {
@@ -102,6 +107,10 @@ void Window::instructions() {
     load_image("instructions.jpg");
 }
 
+void Window::player_instructions() {
+    load_image("player_instructions.jpg");
+}
+
 void Window::take_decision() {
 	SDL_Event input;
 	while (SDL_PollEvent(&input)) {
@@ -115,6 +124,9 @@ void Window::take_decision() {
             case SDLK_i:
                 instructions();
                 break;
+            case SDLK_l:
+                player_instructions();
+                break;
             case SDLK_q:
             case SDLK_n:
                 end(EXIT_SUCCESS);
@@ -122,6 +134,19 @@ void Window::take_decision() {
             case SDLK_r:
             case SDLK_y:
                 restart = true;
+                break;
+            case SDLK_m:
+                player = Marcin;
+                break;
+            case SDLK_k:
+                player = Kasia;
+                break;
+            case SDLK_EQUALS:
+                number_of_points++;
+                break;
+            case SDLK_MINUS:
+                if (number_of_points >= 1)
+                   number_of_points--;
                 break;
             }
 		}

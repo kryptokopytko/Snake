@@ -11,12 +11,6 @@ void Movement::start() {
 	starting_length = 5;
 	length = starting_length;
 	position = new SDL_Rect[number_of_cells];
-	for (int i = length; i < number_of_cells; i++) {
-		position[i].x = 0;
-		position[i].y = 0;
-		position[i].h = 0;
-		position[i].w = 0;
-	}
 	position[0].x = 5 * cell_height;
 	position[0].y = 5 * cell_height;
 	position[0].w = cell_height;

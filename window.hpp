@@ -7,6 +7,7 @@
 #include <string>
 
 using namespace std;
+enum Player { Unknown, Kasia, Marcin };
 
 class Window {
 protected:
@@ -14,10 +15,12 @@ protected:
     int screen_width;
     int cell_height;
     int number_of_cells;
+    int number_of_points;
     SDL_Renderer* renderer;
     SDL_Window* window;
     SDL_Surface* image;
     SDL_Texture* texture;
+    enum Player player;
     
 public:
     bool restart;
@@ -31,6 +34,7 @@ public:
     void take_decision();
     void starting_screen();
     void instructions();
+    void player_instructions();
     void load_image(const char* filename);
     void destroy_image();
 };

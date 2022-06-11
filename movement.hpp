@@ -4,7 +4,6 @@
 #include "window.hpp"
 #include <queue>
 
-
 enum Direction { Up, Right, Down, Left };
 
 class Movement : public Window{

@@ -44,10 +44,11 @@ Color Colors::next_color(Color previous, int step) {
 			next.green = previous.green + step;
 			if (next.green > brightest.green) {
 				green_direction = 1;
-				next.green = previous.green + step;
+				next.green = previous.green - step;
 				changing_one++;
 			}
 		}
+		break;
 	case 2:
 		
 		if (blue_direction == 0) {
