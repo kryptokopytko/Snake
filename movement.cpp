@@ -10,6 +10,7 @@ void Movement::start() {
 	running = true;
 	starting_length = 5;
 	length = starting_length;
+	waiting_moves = queue<Direction>();
 	position = new SDL_Rect[number_of_cells];
 	position[0].x = 5 * cell_height;
 	position[0].y = 5 * cell_height;
@@ -21,8 +22,13 @@ void Movement::start() {
 	}
 }
 
+
+
+
 void Movement::move() {
 	if (pause == true) return;
+
+
 	if (!waiting_moves.empty()) {
 		enum Direction newD = waiting_moves.front();
 		direction = newD;
@@ -33,7 +39,6 @@ void Movement::move() {
 		position[i] = position[i - 1];
 	position[0].x = (position[1].x + ((int)(direction == Right) - (int)(direction == Left)) * cell_height + screen_width) % screen_width;
 	position[0].y = (position[1].y + ((int)(direction == Down) - (int)(direction == Up)) * cell_height + screen_height) % screen_height;
-
 }
 
 void Movement::take_input() {
@@ -54,22 +59,22 @@ void Movement::take_input() {
 				break;
 			case SDLK_w:
 			case SDLK_UP:
-				if (direction != Down && (waiting_moves.empty() || (waiting_moves.back() != Down)))
+				if (waiting_moves.empty() || ((waiting_moves.back() != Down) && (waiting_moves.back() != Up)))
 					waiting_moves.push(Up);
 				break;
 			case SDLK_s:
 			case SDLK_DOWN:
-				if (direction != Up && (waiting_moves.empty() || (waiting_moves.back() != Up)))
+				if  (waiting_moves.empty() || ((waiting_moves.back() != Down) && (waiting_moves.back() != Up)))
 					waiting_moves.push(Down);
 				break;
 			case SDLK_d:
 			case SDLK_RIGHT:
-				if (direction != Left && (waiting_moves.empty() || (waiting_moves.back() != Left)))
+				if (waiting_moves.empty() || ((waiting_moves.front() != Right) && (waiting_moves.back() != Left)))
 					waiting_moves.push(Right);
 				break;
 			case SDLK_a:
 			case SDLK_LEFT:
-				if (direction != Right && (waiting_moves.empty() || (waiting_moves.front() != Right)))
+				if (waiting_moves.empty() || ((waiting_moves.back() != Left) && (waiting_moves.front() != Right)))
 					waiting_moves.push(Left);
 				break;
 			}
