@@ -41,6 +41,20 @@ void Display::extend_gradient() {
 		gradient[i] = col.next_color(gradient[i - 1], step);
 }
 
+void Display::draw_starting_points() {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+
+	for (int i = 0; i < number_of_points; i++) {
+		SDL_Rect p = point_to_rect(points[i]);
+		draw_head(colors[i].starting, p);
+		SDL_Delay(400);
+		SDL_RenderPresent(renderer);
+	}
+	SDL_Delay(300);
+	
+}
+
 void Display::draw() {
 	if (pause == true) return;
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
 		a.generate_gradient();
 		a.generate_points();
 		a.change_score();
+		a.draw_starting_points();
 		while (a.running) {
 			a.draw();
 			a.take_input();

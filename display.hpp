@@ -13,6 +13,7 @@ public:
 	Display();
 	~Display();
 	void draw();
+	void draw_starting_points();
 	void generate_gradient();
 	void extend_gradient();
 	void kill();
