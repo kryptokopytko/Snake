@@ -59,22 +59,22 @@ void Movement::take_input() {
 				break;
 			case SDLK_w:
 			case SDLK_UP:
-				if (waiting_moves.empty() || ((waiting_moves.back() != Down) && (waiting_moves.back() != Up)))
+				if ((waiting_moves.empty() && direction != Down && direction != Up)|| (!waiting_moves.empty() && (waiting_moves.back() != Down) && (waiting_moves.back() != Up)))
 					waiting_moves.push(Up);
 				break;
 			case SDLK_s:
 			case SDLK_DOWN:
-				if  (waiting_moves.empty() || ((waiting_moves.back() != Down) && (waiting_moves.back() != Up)))
+				if  ((waiting_moves.empty() && direction != Down && direction != Up) || (!waiting_moves.empty() && (waiting_moves.back() != Down) && (waiting_moves.back() != Up)))
 					waiting_moves.push(Down);
 				break;
 			case SDLK_d:
 			case SDLK_RIGHT:
-				if (waiting_moves.empty() || ((waiting_moves.front() != Right) && (waiting_moves.back() != Left)))
+				if ((waiting_moves.empty() && direction != Right && direction != Left) || (!waiting_moves.empty() && (waiting_moves.front() != Right) && (waiting_moves.back() != Left)))
 					waiting_moves.push(Right);
 				break;
 			case SDLK_a:
 			case SDLK_LEFT:
-				if (waiting_moves.empty() || ((waiting_moves.back() != Left) && (waiting_moves.front() != Right)))
+				if ((waiting_moves.empty() && direction != Right && direction != Left) || (!waiting_moves.empty() && (waiting_moves.front() != Right) && (waiting_moves.back() != Left)))
 					waiting_moves.push(Left);
 				break;
 			}
