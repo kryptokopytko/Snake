@@ -1,9 +1,5 @@
-#include <iostream>
-#include <SDL.h>
 #include "display.hpp"
-#include "window.hpp"
 #include <ctime> 
-#include "point.hpp"
 
 int main(int argc, char* argv[]) {
 	srand((unsigned)time(0));
