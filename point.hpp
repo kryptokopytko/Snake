@@ -1,7 +1,6 @@
 #ifndef POINT
 #define POINT
 
-#include <SDL.h>
 #include <iostream>
 #include <cstdlib> 
 
